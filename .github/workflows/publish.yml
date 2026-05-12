@@ -20,9 +20,9 @@ jobs:
         uses: gradle/actions/setup-gradle@v3
 
       - name: Publish and Sign Payload
-        run: gradle publish
-        env:
-          OSSRH_USERNAME: ${{ secrets.OSSRH_USERNAME }}
-          OSSRH_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
-          OSSRH_GPG_SECRET_KEY: ${{ secrets.OSSRH_GPG_SECRET_KEY }}
-          OSSRH_GPG_SECRET_KEY_PASSWORD: ${{ secrets.OSSRH_GPG_SECRET_KEY_PASSWORD }}
+        run: |
+          export ORG_GRADLE_PROJECT_signingKey=$(echo "${{ secrets.OSSRH_GPG_SECRET_KEY }}" | base64 -w 0)
+          export ORG_GRADLE_PROJECT_signingPassword="${{ secrets.OSSRH_GPG_SECRET_KEY_PASSWORD }}"
+          export ORG_GRADLE_PROJECT_mavenCentralUsername="${{ secrets.OSSRH_USERNAME }}"
+          export ORG_GRADLE_PROJECT_mavenCentralPassword="${{ secrets.OSSRH_PASSWORD }}"
+          gradle publishAndReleaseToMavenCentral --no-configuration-cache
