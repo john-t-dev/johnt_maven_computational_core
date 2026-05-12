@@ -9,7 +9,7 @@ repositories {
 }
 
 group = "io.github.john-t-dev"
-version = "1.0.4"
+version = "1.0.5"
 
 java {
     withJavadocJar()
