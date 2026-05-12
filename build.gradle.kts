@@ -11,7 +11,7 @@ repositories {
 }
 
 group = "io.github.john-t-dev"
-version = "1.0.7"
+version = "1.0.8"
 
 mavenPublishing {
     publishToMavenCentral("CENTRAL_PORTAL") // Explicitly targets the new API
@@ -47,7 +47,7 @@ signing {
     val signingKeyBase64 = System.getenv("ORG_GRADLE_PROJECT_signingKey")
     val signingPassword = System.getenv("ORG_GRADLE_PROJECT_signingPassword")
     if (signingKeyBase64 != null) {
-        val signingKey = StringBase64.getDecoder().decode(signingKeyBase64))
+        val signingKey = String(Base64.getDecoder().decode(signingKeyBase64))
         useInMemoryPgpKeys(signingKey, signingPassword)
     }
 }
