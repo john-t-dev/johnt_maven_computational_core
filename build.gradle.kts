@@ -1,11 +1,11 @@
 plugins {
-    kotlin("jvm") version "1.9.0"
+    kotlin("jvm") version "2.0.0"
     `maven-publish`
     signing
 }
 
 group = "io.github.john-t-dev"
-version = "1.0.1"
+version = "1.0.2"
 
 java {
     withJavadocJar()
