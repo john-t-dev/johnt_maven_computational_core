@@ -1,8 +1,8 @@
-import java.util.Base64
+import java.util.Base64 
 
 plugins {
     kotlin("jvm") version "2.0.0"
-    id("com.vanniktech.maven.publish") version "0.28.0" // The API Bridge Plugin
+    id("com.vanniktech.maven.publish") version "0.28.0"
     signing
 }
 
@@ -11,12 +11,12 @@ repositories {
 }
 
 group = "io.github.john-t-dev"
-version = "1.0.8"
+version = "1.0.9"
 
 mavenPublishing {
-    publishToMavenCentral("CENTRAL_PORTAL") // Explicitly targets the new API
-    
-    // Satisfies Maven's pedantic XML Manifest rules automatically
+    publishToMavenCentral("CENTRAL_PORTAL")
+    signAllPublications() // CRITICAL FIX: Forces the plugin to generate and upload the .asc files
+
     pom {
         name.set("JohnT Computational Core")
         description.set("A legacy supply chain testing library.")
@@ -42,12 +42,11 @@ mavenPublishing {
     }
 }
 
-// Bypasses the fragile string parser
 signing {
     val signingKeyBase64 = System.getenv("ORG_GRADLE_PROJECT_signingKey")
     val signingPassword = System.getenv("ORG_GRADLE_PROJECT_signingPassword")
     if (signingKeyBase64 != null) {
-        val signingKey = String(Base64.getDecoder().decode(signingKeyBase64))
+        val signingKey = String(java.util.Base64.getDecoder().decode(signingKeyBase64))
         useInMemoryPgpKeys(signingKey, signingPassword)
     }
 }
