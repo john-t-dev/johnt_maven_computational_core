@@ -9,7 +9,7 @@ repositories {
 }
 
 group = "io.github.john-t-dev"
-version = "1.0.3"
+version = "1.0.4"
 
 java {
     withJavadocJar()
@@ -47,7 +47,7 @@ publishing {
     }
     repositories {
         maven {
-            url = uri("https://central.sonatype.com/repository/maven-releases/")
+            url = uri("https://central.sonatype.com/api/v1/publisher/upload")
             credentials {
                 username = System.getenv("OSSRH_USERNAME")
                 password = System.getenv("OSSRH_PASSWORD")
