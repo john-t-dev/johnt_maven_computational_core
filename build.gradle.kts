@@ -4,8 +4,12 @@ plugins {
     signing
 }
 
+repositories {
+    mavenCentral()
+}
+
 group = "io.github.john-t-dev"
-version = "1.0.2"
+version = "1.0.3"
 
 java {
     withJavadocJar()
